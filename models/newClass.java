@@ -11,5 +11,6 @@ public class newClass {
    
    public void correr(){
        System.out.println("Adios");
+       System.out.println("Adios");
    }
 }
