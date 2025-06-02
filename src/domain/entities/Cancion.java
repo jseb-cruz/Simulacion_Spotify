@@ -1,4 +1,4 @@
-package dominio.entidades;
+package domain.entities;
 
 public class Cancion {
 
