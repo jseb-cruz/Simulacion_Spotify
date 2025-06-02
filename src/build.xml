@@ -1,73 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
-<!-- By default, only the Clean and Build commands use this build script. -->
-<!-- Commands such as Run, Debug, and Test only use this build script if -->
-<!-- the Compile on Save feature is turned off for the project. -->
-<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
-<!-- in the project's Project Properties dialog box.-->
-<project name="Simulacion_Spotify" default="default" basedir=".">
-    <description>Builds, tests, and runs the project Simulacion_Spotify.</description>
-    <import file="nbproject/build-impl.xml"/>
-    <!--
-
-    There exist several targets which are by default empty and which can be 
-    used for execution of your tasks. These targets are usually executed 
-    before and after some main targets. They are: 
-
-      -pre-init:                 called before initialization of project properties
-      -post-init:                called after initialization of project properties
-      -pre-compile:              called before javac compilation
-      -post-compile:             called after javac compilation
-      -pre-compile-single:       called before javac compilation of single file
-      -post-compile-single:      called after javac compilation of single file
-      -pre-compile-test:         called before javac compilation of JUnit tests
-      -post-compile-test:        called after javac compilation of JUnit tests
-      -pre-compile-test-single:  called before javac compilation of single JUnit test
-      -post-compile-test-single: called after javac compilation of single JUunit test
-      -pre-jar:                  called before JAR building
-      -post-jar:                 called after JAR building
-      -post-clean:               called after cleaning build products
-
-    (Targets beginning with '-' are not intended to be called on their own.)
-
-    Example of inserting an obfuscator after compilation could look like this:
-
-        <target name="-post-compile">
-            <obfuscate>
-                <fileset dir="${build.classes.dir}"/>
-            </obfuscate>
-        </target>
-
-    For list of available properties check the imported 
-    nbproject/build-impl.xml file. 
-
-
-    Another way to customize the build is by overriding existing main targets.
-    The targets of interest are: 
-
-      -init-macrodef-javac:     defines macro for javac compilation
-      -init-macrodef-junit:     defines macro for junit execution
-      -init-macrodef-debug:     defines macro for class debugging
-      -init-macrodef-java:      defines macro for class execution
-      -do-jar:                  JAR building
-      run:                      execution of project 
-      -javadoc-build:           Javadoc generation
-      test-report:              JUnit report generation
-
-    An example of overriding the target for project execution could look like this:
-
-        <target name="run" depends="Simulacion_Spotify-impl.jar">
-            <exec dir="bin" executable="launcher.exe">
-                <arg file="${dist.jar}"/>
-            </exec>
-        </target>
-
-    Notice that the overridden target depends on the jar target and not only on 
-    the compile target as the regular run target does. Again, for a list of available 
-    properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file. 
-
-    -->
+<project name="Simulacion_Spotify" default="dist" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+    <description>Build file for Spotify Simulation with Linked Lists</description>
+    
+    <!-- 1. Propiedades Globales -->
+    <property name="src.dir" location="src/main/java"/>
+    <property name="test.dir" location="src/test/java"/>
+    <property name="build.dir" location="build"/>
+    <property name="classes.dir" location="${build.dir}/classes"/>
+    <property name="test.classes.dir" location="${build.dir}/test-classes"/>
+    <property name="dist.dir" location="dist"/>
+    <property name="lib.dir" location="lib"/>
+    <property name="reports.dir" location="reports"/>
+    <property name="main.class" value="com.spotify.simulation.Main"/>
+    <property name="java.version" value="21"/>
+    
+    <!-- 2. Configuración de Classpath -->
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        <!-- MySQL Connector si usas base de datos -->
+        <fileset file="${lib.dir}/mysql-connector-java-8.0.28.jar"/>
+    </path>
+    
+    <path id="test.classpath">
+        <path refid="classpath"/>
+        <pathelement location="${classes.dir}"/>
+    </path>
+    
+    <!-- 3. Inicialización -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${test.classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${reports.dir}"/>
+        <echo message="Java version: ${java.version}"/>
+    </target>
+    
+    <!-- 4. Compilación del código principal -->
+    <target name="compile" depends="init" description="Compile main source code">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" 
+               includeantruntime="false" source="${java.version}" target="${java.version}">
+            <classpath refid="classpath"/>
+            <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:deprecation"/>
+        </javac>
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}" excludes="**/*.java"/>
+        </copy>
+    </target>
+    
+    <!-- 5. Compilación de pruebas -->
+    <target name="compile-tests" depends="compile" description="Compile test cases">
+        <javac srcdir="${test.dir}" destdir="${test.classes.dir}" 
+               includeantruntime="false" source="${java.version}" target="${java.version}">
+            <classpath refid="test.classpath"/>
+        </javac>
+    </target>
+    
+    <!-- 6. Ejecución de pruebas unitarias -->
+    <target name="test" depends="compile-tests" description="Run unit tests">
+        <junit printsummary="yes" haltonfailure="no">
+            <classpath>
+                <path refid="test.classpath"/>
+                <pathelement location="${test.classes.dir}"/>
+            </classpath>
+            <formatter type="xml"/>
+            <batchtest todir="${reports.dir}">
+                <fileset dir="${test.dir}" includes="**/*Test.java"/>
+            </batchtest>
+        </junit>
+        <junitreport todir="${reports.dir}">
+            <fileset dir="${reports.dir}" includes="TEST-*.xml"/>
+            <report todir="${reports.dir}"/>
+        </junitreport>
+    </target>
+    
+    <!-- 7. Creación del JAR ejecutable -->
+    <target name="dist" depends="compile,test" description="Generate the distribution">
+        <jar destfile="${dist.dir}/spotify-simulation.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${src.dir}" includes="**/*.properties,**/*.xml"/>
+        </jar>
+        <copy todir="${dist.dir}/lib">
+            <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        </copy>
+    </target>
+    
+    <!-- 8. Ejecución de la aplicación -->
+    <target name="run" depends="dist" description="Run the application">
+        <java jar="${dist.dir}/spotify-simulation.jar" fork="true">
+            <classpath>
+                <path refid="classpath"/>
+                <pathelement location="${dist.dir}/spotify-simulation.jar"/>
+            </classpath>
+        </java>
+    </target>
+    
+    <!-- 9. Generación de documentación JavaDoc -->
+    <target name="javadoc" description="Generate documentation">
+        <mkdir dir="${dist.dir}/docs/api"/>
+        <javadoc sourcepath="${src.dir}" destdir="${dist.dir}/docs/api" 
+                 classpathref="classpath" version="true" use="true" windowtitle="Spotify Simulation API">
+            <doctitle><![CDATA[<h1>Spotify Simulation</h1>]]></doctitle>
+            <fileset dir="${src.dir}" includes="**/*.java"/>
+        </javadoc>
+    </target>
+    
+    <!-- 10. Limpieza -->
+    <target name="clean" description="Clean up">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${reports.dir}"/>
+    </target>
+    
+    <!-- 11. Target completo para desarrollo -->
+    <target name="all" depends="clean,dist,javadoc" description="Clean build and generate docs"/>
+    
+    <!-- 12. Integración con NetBeans (opcional) -->
+    <import file="nbproject/build-impl.xml" optional="true"/>
 </project>
