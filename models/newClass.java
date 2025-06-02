@@ -10,6 +10,6 @@
 public class newClass {
    
    public void correr(){
-       System.out.println("PRuebaaaaa");
+       System.out.println("Holaaaa");
    }
 }
