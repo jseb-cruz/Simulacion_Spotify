@@ -1,6 +1,6 @@
 package domain.entities;
 
-import java.util.concurrent.Flow.Subscription;
+import java.util.Objects;
 
 public class Usuario {
 
@@ -12,6 +12,7 @@ public class Usuario {
     private String password;
     private Rol rol;
     private Suscripcion suscripcion;
+    private boolean activo; // Indica si el usuario está activo
 
     // constructores
 
@@ -25,6 +26,7 @@ public class Usuario {
         this.password = password;
         this.rol = rol;
         this.suscripcion = suscripcion;
+        this.activo = true; // Asignar activo por defecto
     }
 
     // getters y setters
@@ -91,6 +93,13 @@ public class Usuario {
     public void setSuscripcion(Suscripcion suscripcion) {
         this.suscripcion = suscripcion;
     }
+     public boolean isActive() {
+        return activo;
+    }
+
+    public void setActive(boolean activo) {
+        this.activo = activo;
+    }
 
       // 3. Métodos de negocio (HU006, HU007)
 
@@ -113,7 +122,7 @@ public class Usuario {
     // 4. Métodos estáticos de fábrica 
     public static Usuario crearUsuarioGratuito(String id, String name, String email, String password) {
         return new Usuario(
-                generarId(id),
+                generarId(),
                 name,
                 email,
                 password,
@@ -121,7 +130,7 @@ public class Usuario {
                 Suscripcion.obtenerSuscripcionGratuita());
     }
 
-    private static String generarId(String id2) {
+    private static String generarId() {
         return java.util.UUID.randomUUID().toString();
     }
 
@@ -133,13 +142,14 @@ public class Usuario {
         if (o == null || getClass() != o.getClass())
             return false;
         Usuario usuario = (Usuario) o;
-        return id.equals(usuario.id);
+        return Objects.equals(id, usuario.id) &&
+                Objects.equals(email, usuario.email);
 
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return Objects.hash(id, email);
     }
 
     @Override
@@ -148,8 +158,9 @@ public class Usuario {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", rol=" + rol +
-                ", suscripcion=" + suscripcion +
+                ", rol=" + rol.getNombre() +
+                ", suscripcion=" + suscripcion.getNombre() +
+                ", activo=" + activo +
                 '}';
     }
 
