@@ -1,4 +1,4 @@
-package infrastructure.listas;
+package infraestructura.listas;
 
 public class ListaCircularEnlazada {
 
