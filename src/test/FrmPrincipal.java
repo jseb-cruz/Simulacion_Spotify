@@ -17,8 +17,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnLupa = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         panelNavegacion = new javax.swing.JPanel();
+        btnHome = new javax.swing.JButton();
+        lblHome = new javax.swing.JLabel();
         panelReproduccion = new javax.swing.JPanel();
         panelRecomendaciones = new javax.swing.JPanel();
+        btnAlbum1 = new javax.swing.JButton();
+        btnAlbum2 = new javax.swing.JButton();
+        btnAlbum3 = new javax.swing.JButton();
+        btnAlbum4 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         panelReproductor = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -59,7 +69,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(panelTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(btnLupa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cajaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -69,19 +79,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
             panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTituloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cajaBuscar)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(panelTituloLayout.createSequentialGroup()
-                .addComponent(btnLupa)
+                .addGroup(panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cajaBuscar, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLupa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         btnCerrar.setBackground(new java.awt.Color(204, 0, 0));
         btnCerrar.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
         btnCerrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCerrar.setText("X");
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar.png"))); // NOI18N
         btnCerrar.setBorderPainted(false);
         btnCerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,28 +102,95 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         panelNavegacion.setBackground(new java.awt.Color(17, 18, 22));
 
+        btnHome.setBackground(new java.awt.Color(17, 18, 22));
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/home.png"))); // NOI18N
+
+        lblHome.setFont(new java.awt.Font("Malgun Gothic", 1, 16)); // NOI18N
+        lblHome.setForeground(new java.awt.Color(22, 119, 215));
+        lblHome.setText("Home");
+
         javax.swing.GroupLayout panelNavegacionLayout = new javax.swing.GroupLayout(panelNavegacion);
         panelNavegacion.setLayout(panelNavegacionLayout);
         panelNavegacionLayout.setHorizontalGroup(
             panelNavegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 185, Short.MAX_VALUE)
+            .addGroup(panelNavegacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnHome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblHome, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelNavegacionLayout.setVerticalGroup(
             panelNavegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGroup(panelNavegacionLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(panelNavegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelReproduccion.setBackground(new java.awt.Color(17, 18, 22));
+
+        btnAlbum1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/111XPANTIA (deluxe).jpg"))); // NOI18N
+
+        btnAlbum2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pa las babys y la belikeada.jpg"))); // NOI18N
+
+        btnAlbum3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/DeBITiRARMaSFOToS.jpg"))); // NOI18N
+
+        btnAlbum4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/SIXDO.jpg"))); // NOI18N
+
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setText("jLabel4");
+
+        jLabel5.setText("jLabel5");
 
         javax.swing.GroupLayout panelRecomendacionesLayout = new javax.swing.GroupLayout(panelRecomendaciones);
         panelRecomendaciones.setLayout(panelRecomendacionesLayout);
         panelRecomendacionesLayout.setHorizontalGroup(
             panelRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelRecomendacionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRecomendacionesLayout.createSequentialGroup()
+                        .addGroup(panelRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAlbum1)
+                            .addComponent(btnAlbum4)
+                            .addComponent(jLabel2))
+                        .addGap(77, 77, 77)
+                        .addGroup(panelRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAlbum2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAlbum3)
+                            .addComponent(jLabel4)))
+                    .addGroup(panelRecomendacionesLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panelRecomendacionesLayout.setVerticalGroup(
             panelRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(panelRecomendacionesLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addGroup(panelRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAlbum1)
+                    .addComponent(btnAlbum2)
+                    .addComponent(btnAlbum3))
+                .addGap(18, 18, 18)
+                .addGroup(panelRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(49, 49, 49)
+                .addComponent(btnAlbum4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelReproductorLayout = new javax.swing.GroupLayout(panelReproductor);
@@ -174,8 +251,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelReproduccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelNavegacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelNavegacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(panelReproduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 270, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -235,11 +314,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlbum1;
+    private javax.swing.JButton btnAlbum2;
+    private javax.swing.JButton btnAlbum3;
+    private javax.swing.JButton btnAlbum4;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLupa;
     private javax.swing.JTextField cajaBuscar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblHome;
     private javax.swing.JPanel panelNavegacion;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelRecomendaciones;
